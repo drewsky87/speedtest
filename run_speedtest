@@ -1,0 +1,44 @@
+#!/bin/bash
+
+_tmpFile='/opt/speedtest/.speedtest.out.tmp'
+
+log(){
+        _logFile='/opt/speedtest/speedtest.log'
+        _logDate=`date +'%F %X'`
+        _logLevel=$1
+        _logMsg=$2
+
+        if [ ! -e $_logFile ]; then
+                touch $_logFile
+        fi
+
+        echo -e "$_logDate\t[$_logLevel]\t$_logMsg" >> $_logFile
+}
+
+## Run the speedtest and log results
+runSpeedtest(){
+        /usr/bin/speedtest --accept-license > $_tmpFile
+
+        _download=`cat $_tmpFile | grep Download | awk '{print $3}'`
+        _upload=`cat $_tmpFile | grep Upload | awk '{print $3}'`
+        _latency=`cat $_tmpFile | grep Latency | awk '{print $2}'`
+        _isp=`cat $_tmpFile | grep ISP | awk '{print $2}'`
+
+        log INFO "Download Speed: $_download Mbps ; Upload Speed: $_upload Mbps ; Latency: $_latency ms"
+}
+
+## Insert results into influxdb
+insertToInfluxdb(){
+        _dbname='speedtest'
+        curl -i -XPOST 'http://localhost:8086/write?db=speedtest' --data-binary "$_dbname download=$_download,upload=$_upload,latency=$_latency"
+}
+
+## Cleanup temporary files
+cleanUp(){
+        rm -rf $_tmpFile
+}
+
+
+runSpeedtest
+insertToInfluxdb
+cleanUp
