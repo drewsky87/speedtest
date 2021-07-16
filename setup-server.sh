@@ -1,5 +1,6 @@
 #!/bin/bash
 
+## Configure Grafana repo
 cat << EOF > /etc/yum.repos.d/grafana.repo
 [grafana]
 name=grafana
@@ -14,6 +15,7 @@ EOF
 
 chmod 644 /etc/yum.repos.d/grafana.repo
 
+## Configure InfluxDB repo
 cat << EOF > /etc/yum.repos.d/influxdb.repo
 [influxdb]
 name = InfluxDB Repository - RHEL \$releasever
@@ -30,10 +32,7 @@ curl -s https://install.speedtest.net/app/cli/install.rpm.sh | bash
 
 ## Install grafana, influxdb, git and speedtest
 yum clean all
-yum -y install grafana
-yum -y install influxdb
-yum -y install speedtest
-yum -y install git
+yum -y install grafana influxdb speedtest git
 
 ## Enable and start Grafana and InfluxDB
 systemctl enable grafana-server && systemctl start grafana-server
