@@ -87,7 +87,7 @@ echo "****************************************************"
 echo "****************************************************"
 echo
 echo
-echo "Grafana URL:  https://$ip:3000"
+echo "Grafana URL:  http://$ip:3000"
 echo "   Default Username: admin"
 echo "   Default Password: admin"
 echo
