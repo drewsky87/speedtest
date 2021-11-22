@@ -78,13 +78,13 @@ chmod 750 /opt/speedtest/run_speedtest
 
 ip=`ifconfig | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}'`
 clear
-echo "****************************************************"
-echo "****************************************************"
+echo "********************************************************"
+echo "********************************************************"
 echo
 echo "Grafana and InfluxDB Setup Complete"
 echo
-echo "****************************************************"
-echo "****************************************************"
+echo "********************************************************"
+echo "********************************************************"
 echo
 echo
 echo "Grafana URL:  http://$ip:3000"
@@ -101,6 +101,9 @@ echo "  5. Change URL to http://localhost:8086"
 echo "  6. Change database name to speedtest"
 echo "  7. Click Save & test"
 echo
-echo "****************************************************"
-echo "****************************************************"
+echo -e "  Note: If the data does not show up on the graphs"
+echo -e "        you may have to switch the type to \"Graph (old)\""
+echo -e "        and then back to \"Time series\""
+echo "********************************************************"
+echo "********************************************************"
 
