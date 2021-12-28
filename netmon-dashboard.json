@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -115,12 +115,27 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Download Speed"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
         "h": 7,
-        "w": 12,
+        "w": 18,
         "x": 0,
         "y": 0
       },
@@ -176,6 +191,91 @@
       ],
       "title": "Download Speed",
       "type": "timeseries"
+    },
+    {
+      "datasource": "InfluxDB-Speedtest",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "displayName": "24 Hour Average (Mbps)",
+          "mappings": [],
+          "max": 1000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 500
+              },
+              {
+                "color": "green",
+                "value": 800
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "text": {
+          "titleSize": 13
+        }
+      },
+      "pluginVersion": "8.0.4",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "speedtest",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"download\") FROM \"speedtest\" where time > now() - 1d",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "download"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Download Avgerage",
+      "type": "gauge"
     },
     {
       "datasource": "InfluxDB-Speedtest",
@@ -279,9 +379,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 0
+        "w": 18,
+        "x": 0,
+        "y": 7
       },
       "id": 3,
       "options": {
@@ -335,6 +435,91 @@
       ],
       "title": "Upload Speed",
       "type": "timeseries"
+    },
+    {
+      "datasource": "InfluxDB-Speedtest",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "displayName": "24 Hour Average (Mbps)",
+          "mappings": [],
+          "max": 1000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 500
+              },
+              {
+                "color": "green",
+                "value": 800
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 7
+      },
+      "id": 8,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "text": {
+          "titleSize": 13
+        }
+      },
+      "pluginVersion": "8.0.4",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "speedtest",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"upload\") FROM \"speedtest\" where time > now() - 1d",
+          "queryType": "randomWalk",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "download"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Upload Avgerage",
+      "type": "gauge"
     },
     {
       "datasource": "InfluxDB-Speedtest",
@@ -438,9 +623,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 24,
+        "w": 18,
         "x": 0,
-        "y": 7
+        "y": 14
       },
       "id": 4,
       "options": {
@@ -503,176 +688,6 @@
             "mode": "thresholds"
           },
           "decimals": 2,
-          "displayName": "24 Hour Average (Mbps)",
-          "mappings": [],
-          "max": 1000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 500
-              },
-              {
-                "color": "green",
-                "value": 800
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 7,
-        "x": 0,
-        "y": 14
-      },
-      "id": 7,
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {
-          "titleSize": 13
-        }
-      },
-      "pluginVersion": "8.0.4",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "speedtest",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"download\") FROM \"speedtest\" where time > now() - 1d",
-          "queryType": "randomWalk",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "download"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Download Avg. Guage",
-      "type": "gauge"
-    },
-    {
-      "datasource": "InfluxDB-Speedtest",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "displayName": "24 Hour Average (Mbps)",
-          "mappings": [],
-          "max": 1000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 500
-              },
-              {
-                "color": "green",
-                "value": 800
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 7,
-        "x": 7,
-        "y": 14
-      },
-      "id": 8,
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {
-          "titleSize": 13
-        }
-      },
-      "pluginVersion": "8.0.4",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "speedtest",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"upload\") FROM \"speedtest\" where time > now() - 1d",
-          "queryType": "randomWalk",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "download"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Upload Avg. Guage",
-      "type": "gauge"
-    },
-    {
-      "datasource": "InfluxDB-Speedtest",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
           "displayName": "24 Hour Average (ms)",
           "mappings": [],
           "max": 50,
@@ -698,9 +713,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 7,
-        "x": 14,
+        "h": 7,
+        "w": 6,
+        "x": 18,
         "y": 14
       },
       "id": 9,
@@ -747,7 +762,7 @@
           "tags": []
         }
       ],
-      "title": "Latency Avg. Guage",
+      "title": "Latency Avgerage",
       "type": "gauge"
     }
   ],
@@ -759,12 +774,12 @@
     "list": []
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Network Speedtest",
-  "uid": "t0Bjkrznz",
-  "version": 11
+  "title": "Network Speedtest Monitor",
+  "uid": "FoRqcMi7k",
+  "version": 5
 }
