@@ -32,7 +32,7 @@ curl -s https://install.speedtest.net/app/cli/install.rpm.sh | bash
 
 ## Install grafana, influxdb, git and speedtest
 yum clean all
-yum -y install grafana influxdb speedtest git
+yum -y install cronie grafana influxdb speedtest git
 
 ## Enable and start Grafana and InfluxDB
 systemctl enable grafana-server && systemctl start grafana-server
